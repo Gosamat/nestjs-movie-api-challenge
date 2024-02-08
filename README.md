@@ -39,7 +39,7 @@ Follow these steps to get the API up and running:
 1. **Clone the repository:**
 
     ```bash
-    git clone <repository-url>
+    git clone git@github.com:Gosamat/nestjs-movie-api-challenge.git
     ```
 
 2. **Install dependencies:**
