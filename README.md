@@ -1,73 +1,119 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# NestJS Movie API Backend Code Challenge
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+This project is a RESTful API built with NestJS, a powerful Node.js framework using TypeScript. The API allows users to manage movies and genres in a database, providing functionalities for listing, adding, updating, and deleting movies and genres, as well as searching for movies by title or genre.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Requirements
 
-## Description
+To run this API, you'll need:
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- NestJS framework
+- TypeScript
+- SQL database (such as PostgreSQL, MySQL, etc.)
 
-## Installation
+## Features
 
-```bash
-$ npm install
-```
+### Movies
 
-## Running the app
+- **List Movies**: View all movies stored in the database.
+- **Add Movie**: Add a new movie with details like title, description, release date, and genre(s).
+- **Update Movie**: Modify the details of a specific movie.
+- **Delete Movie**: Remove a movie from the database.
+- **Search Movies**: Find movies based on title or genre.
 
-```bash
-# development
-$ npm run start
+### Genres
 
-# watch mode
-$ npm run start:dev
+- **List Genres**: See all available genres.
+- **Add Genre**: Include a new genre in the database.
+- **Delete Genre**: Remove a genre, along with its association from movies.
 
-# production mode
-$ npm run start:prod
-```
+## Bonus Tasks
 
-## Test
+- **Pagination**: Implemented pagination for better handling of movie lists.
+- **Middleware for Request Logging**: Added logging for incoming requests.
+- **Data Validation and Error Handling**: Ensured data validation and comprehensive error handling.
 
-```bash
-# unit tests
-$ npm run test
+## How to Run
 
-# e2e tests
-$ npm run test:e2e
+Follow these steps to get the API up and running:
 
-# test coverage
-$ npm run test:cov
-```
+1. **Clone the repository:**
 
-## Support
+    ```bash
+    git clone <repository-url>
+    ```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+2. **Install dependencies:**
 
-## Stay in touch
+    ```bash
+    cd nestjs-movie-api
+    npm install
+    ```
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+3. **Set up your database connection:**
+
+    Create a `.env` file in the root directory and specify the following variables:
+
+    ```dotenv
+    DB_HOST=localhost
+    DB_PORT=3306
+    DB_USERNAME=test
+    DB_PASSWORD=test
+    DB_DATABASE=moviesApi
+    ```
+
+    Make sure to replace the values with your actual database credentials.
+
+4. **Run the application:**
+
+    ```bash
+    npm run start:dev
+    ```
+
+    With these environment variables properly set up, the application will be able to connect to your database.
+
+## API Endpoints
+
+### Movies
+
+- **GET /movies**: List all movies.
+    - **Parameters**: None
+- **POST /movies**: Add a new movie.
+    - **Parameters**:
+        - Title (String, required)
+        - Description (String, required)
+        - Release date (Date, required)
+        - Genre(s) (Array of Strings, required)
+- **PATCH /movies/:id**: Update a movie by ID.
+    - **Parameters**:
+        - ID (String, required)
+        - Updated movie details (Object, required)
+- **DELETE /movies/:id**: Delete a movie by ID.
+    - **Parameters**:
+        - ID (String, required)
+- **POST /movies/search**: Search movies by title or genre.
+    - **Parameters**:
+        - Title (String, optional)
+        - Genre (String, optional)
+
+### Genres
+
+- **GET /genres**: List all genres.
+    - **Parameters**: None
+- **POST /genres**: Add a new genre.
+    - **Parameters**:
+        - Name (String, required)
+- **DELETE /genres/:id**: Delete a genre by ID.
+    - **Parameters**:
+        - ID (String, required)
+
+## Testing the API
+
+You can test the API endpoints using Postman or any other API testing tool. Additionally, I will be implementing Swagger UI so you can explore the API.
+
+## Postman Collection
+
+I will also later add Postman collection file for testing the API endpoints in the `postman` directory of this repository.
 
 ## License
 
-Nest is [MIT licensed](LICENSE).
+This project is licensed under the [MIT License](LICENSE).
