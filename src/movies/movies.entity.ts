@@ -1,5 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable } from 'typeorm';
-import { Genre } from './genre.entity';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+} from 'typeorm';
 
 @Entity()
 export class Movie {
@@ -15,7 +18,6 @@ export class Movie {
   @Column({ type: 'date' })
   releaseDate: Date;
 
-  @ManyToMany(() => Genre)
-  @JoinTable()
-  genres: Genre[];
+  @Column({ type: 'text' })
+  genre: string[];
 }
