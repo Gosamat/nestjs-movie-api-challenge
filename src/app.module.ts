@@ -25,8 +25,8 @@ import { GenreModule } from './genres/genres.module';
       password: process.env.DB_PASSWORD,
       database: process.env.DB_DATABASE,
       autoLoadEntities: true,
-      synchronize: false,
-      logging: true,
+      synchronize: true,
+      logging: false,
     }),
   ],
 })

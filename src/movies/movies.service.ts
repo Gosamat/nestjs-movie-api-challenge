@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { Movie } from './movies.entity';
 import { CreateMovieDto } from './dto/create-movies.dto';
 import { Genre } from '../genres/genres.entity';
+import { UpdateMovieDto } from './dto/update-movies.dto';
 
 @Injectable()
 export class MoviesService {
@@ -18,7 +19,7 @@ export class MoviesService {
   async getAllMovies(page: number = 1, limit: number = 10) {
     try {
       const [movies, totalCount] = await this.moviesRepository.findAndCount({
-        relations: ['genres'], // load the 'genres' relation
+        relations: ['genres'], // Load the 'genres' relation
         skip: (page - 1) * limit,
         take: limit,
       });
@@ -42,17 +43,20 @@ export class MoviesService {
   ) {
     try {
       const queryBuilder = this.moviesRepository.createQueryBuilder('movie');
-      if (title) {
-        queryBuilder.where('movie.title = :title', { title });
+      queryBuilder.leftJoinAndSelect('movie.genres', 'genre'); // Use leftJoin instead of innerJoin
+
+      console.log(title, genre);
+      if (title && genre) {
+        queryBuilder.where('movie.title = :title AND genre.name = :genre', {
+          title,
+          genre,
+        }); // Apply both title and genre conditions
+      } else if (title) {
+        queryBuilder.where('movie.title = :title', { title }); // Apply only title condition
+      } else if (genre) {
+        queryBuilder.where('genre.name = :genre', { genre }); // Apply only genre condition
       }
-      if (genre) {
-        queryBuilder.innerJoinAndSelect(
-          'movie.genres',
-          'genre',
-          'genre.name = :genre',
-          { genre },
-        );
-      }
+
       const [movies, totalCount] = await queryBuilder
         .skip((page - 1) * limit)
         .take(limit)
@@ -73,8 +77,16 @@ export class MoviesService {
     try {
       const { title, description, releaseDate, genre } = receivedMovie;
 
+      // Check if movie with the same title already exists
+      const existingMovie = await this.moviesRepository.findOne({
+        where: { title: receivedMovie.title },
+      });
+      if (existingMovie) {
+        throw new Error('Movie with the same name already exists');
+      }
+
       // Find or create genres and associate them with the movie
-      let genres = [];
+      let genres: Genre[] = [];
       if (genre && genre.length > 0) {
         genres = await Promise.all(
           genre.map(async (genreName) => {
@@ -108,7 +120,7 @@ export class MoviesService {
   }
 
   // Updates the information of an existing movie.
-  async updateMovie(id: number, updatedMovieInfo) {
+  async updateMovie(id: number, updatedMovieInfo: UpdateMovieDto) {
     try {
       const foundMovie = await this.moviesRepository.findOne({ where: { id } });
 

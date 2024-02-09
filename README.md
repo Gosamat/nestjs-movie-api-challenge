@@ -9,6 +9,7 @@ To run this API, you'll need:
 - NestJS framework
 - TypeScript
 - SQL database (such as PostgreSQL, MySQL, etc.)
+- Zod schema validation
 
 ## Features
 
@@ -29,8 +30,8 @@ To run this API, you'll need:
 ## Bonus Tasks
 
 - **Pagination**: Implemented pagination for better handling of movie lists.
-- **Middleware for Request Logging**: Added logging for incoming requests.
-- **Data Validation and Error Handling**: Ensured data validation and comprehensive error handling.
+- **Middleware for Request Logging**: Added logging for incoming requests, visible in terminal.
+- **Data Validation and Error Handling**: Ensured data validation via Zod and comprehensive error handling.
 
 ## How to Run
 
@@ -38,81 +39,81 @@ Follow these steps to get the API up and running:
 
 1. **Clone the repository:**
 
-    ```bash
-    git clone git@github.com:Gosamat/nestjs-movie-api-challenge.git
-    ```
+   ```bash
+   git clone git@github.com:Gosamat/nestjs-movie-api-challenge.git
+   ```
 
 2. **Install dependencies:**
 
-    ```bash
-    cd nestjs-movie-api
-    npm install
-    ```
+   ```bash
+   cd nestjs-movie-api
+   npm install
+   ```
 
 3. **Set up your database connection:**
 
-    Create a `.env` file in the root directory and specify the following variables:
+   Create a `.env` file in the root directory and specify the following variables:
 
-    ```dotenv
-    DB_HOST=localhost
-    DB_PORT=3306
-    DB_USERNAME=test
-    DB_PASSWORD=test
-    DB_DATABASE=moviesApi
-    ```
+   ```dotenv
+   DB_HOST=localhost
+   DB_PORT=3306
+   DB_USERNAME=test
+   DB_PASSWORD=test
+   DB_DATABASE=moviesApi
+   ```
 
-    Make sure to replace the values with your actual database credentials.
+   Make sure to replace the values with your actual database credentials.
 
 4. **Run the application:**
 
-    ```bash
-    npm run start:dev
-    ```
+   ```bash
+   npm run start:dev
+   ```
 
-    With these environment variables properly set up, the application will be able to connect to your database.
+   With the environment variables properly set up, the application will be able to connect and run smoothly.
 
 ## API Endpoints
 
 ### Movies
 
 - **GET /movies**: List all movies.
-    - **Parameters**: None
+  - **Parameters**: None
 - **POST /movies**: Add a new movie.
-    - **Parameters**:
-        - Title (String, required)
-        - Description (String, required)
-        - Release date (Date, required)
-        - Genre(s) (Array of Strings, required)
+  - **Body Parameters**:
+    - Title (String, required)
+    - Description (String, required)
+    - Release date (Date, required)
+    - Genre(s) (Array of Strings, required)
 - **PATCH /movies/:id**: Update a movie by ID.
-    - **Parameters**:
-        - ID (String, required)
-        - Updated movie details (Object, required)
+  - **Parameters**:
+    - ID (String, required)
+    - Updated movie details (Object, required)
 - **DELETE /movies/:id**: Delete a movie by ID.
-    - **Parameters**:
-        - ID (String, required)
-- **POST /movies/search**: Search movies by title or genre.
-    - **Parameters**:
-        - Title (String, optional)
-        - Genre (String, optional)
+  - **Parameters**:
+    - ID (String, required)
+- **GET /movies/search**: Search movies by title or genre.
+  - **Query Parameters**:
+    - Title (String, optional)
+    - Genre (String, optional)
 
 ### Genres
 
 - **GET /genres**: List all genres.
-    - **Parameters**: None
-- **POST /genres**: Add a new genre.
-    - **Parameters**:
-        - Name (String, required)
+  - **Parameters**: None
+- **POST /genres**: Add a new genre via body.
+  - **Body Parameters**:
+    - Name (String, required)
 - **DELETE /genres/:id**: Delete a genre by ID.
-    - **Parameters**:
-        - ID (String, required)
+  - **Parameters**:
+    - ID (String, required)
 
 ## Testing the API
 
-You can test the API endpoints using Postman or any other API testing tool. Additionally, I will be implementing Swagger UI so you can explore the API.
+You can test the API endpoints using Postman or any other API testing tool. Additionally, Swagger UI is implemented so you can explore the API via http://localhost:3000/api.
 
 ## Postman Collection
 
-I will also later add Postman collection file for testing the API endpoints in the `postman` directory of this repository.
+In the root directory of this project, there is also a Postman collection file for testing the API endpoints in `postman`.
 
 ## License
 

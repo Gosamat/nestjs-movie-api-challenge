@@ -1,0 +1,229 @@
+{
+  "info": {
+    "_postman_id": "56d0194c-adf5-47b6-957c-9dc24bef5972",
+    "name": "NestJS Movie API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "20164094"
+  },
+  "item": [
+    {
+      "name": "POST to create a new movie",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"title\":\"Johnny Bravo Wick\",\r\n    \"description\": \"When a man has nothing to lose except his bravo hair, there is only one thing left for him to do\",\r\n    \"releaseDate\":\"2024-10-10\",\r\n    \"genre\":[\"Action\", \"Romance\", \"Suspense\"]\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/movies",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["movies"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "POST to create another movie",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"title\":\"Slightly faster and less furious\",\r\n    \"description\": \"When the brakes hit hard, you know that it's time for our team to get tyred\",\r\n    \"releaseDate\":\"2024-05-22\",\r\n    \"genre\":[\"Action\", \"racing\"]\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/movies",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["movies"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET to show all movies",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/movies",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["movies"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "PATCH to update movie with ID=1",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"title\":\"The slightly Evil Temp Resident (this title comes from the PATCH in Postman Collection)\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/movies/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["movies", "1"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "DELETE to remove movie with ID=2",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/movies/2",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["movies", "2"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET to show all genres",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/genres",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["genres"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "POST to create new genre",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\":\"dog-comedy\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/genres",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["genres"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "DELETE to remove genre with ID=2",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/genres/2",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["genres", "2"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET to search movies with query title",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/movies/search?title=johnny",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["movies", "search"],
+          "query": [
+            {
+              "key": "title",
+              "value": "johnny"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET to search movies with query genre",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/movies/search?genre=action",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["movies", "search"],
+          "query": [
+            {
+              "key": "genre",
+              "value": "action"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

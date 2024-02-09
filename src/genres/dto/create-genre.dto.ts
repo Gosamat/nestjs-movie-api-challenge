@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { ApiProperty } from '@nestjs/swagger';
 
 export const createGenreSchema = z
   .object({
@@ -7,3 +8,9 @@ export const createGenreSchema = z
   .required();
 
 export type CreateGenreDto = z.infer<typeof createGenreSchema>;
+
+// ApiProperty decorator for each property
+export class CreateGenreDtoApiDocs {
+  @ApiProperty({ description: 'Name of the genre' })
+  name: string;
+}
