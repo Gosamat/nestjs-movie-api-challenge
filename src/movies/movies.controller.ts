@@ -18,35 +18,46 @@ export class MoviesController {
 
   // Create a new movie
   @Post()
-  create(@Body() createMovieDto: CreateMovieDto) {
-    return this.moviesService.create(createMovieDto);
+  createMovie(@Body() createMovieDto: CreateMovieDto) {
+    return this.moviesService.addMovie(createMovieDto);
   }
 
   // Get all movies with pagination support
   @Get()
-  findAll(@Query('page') page: number = 1, @Query('limit') limit: number = 10) {
-    return this.moviesService.find(page, limit);
+  getAllMovies(
+    @Query('page') page: number = 1,
+    @Query('limit') limit: number = 10,
+  ) {
+    return this.moviesService.getAllMovies(page, limit);
   }
 
   // Search for movies by title and genre
   @Post('search')
-  findByTitleAndGenre(
-    @Body() searchParams: { title: string, genre: string },
+  searchMovies(
+    @Body() searchParams: { title: string; genre: string },
     @Query('page') page: number = 1,
     @Query('limit') limit: number = 10,
   ) {
-    return this.moviesService.findBy(searchParams.title, searchParams.genre, page, limit);
+    return this.moviesService.searchMovies(
+      searchParams.title,
+      searchParams.genre,
+      page,
+      limit,
+    );
   }
 
   // Update a movie by ID
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updatedMovieDto: CreateMovieDto) {
-    return this.moviesService.update(+id, updatedMovieDto);
+  updateMovie(
+    @Param('id') id: string,
+    @Body() updatedMovieDto: CreateMovieDto,
+  ) {
+    return this.moviesService.updateMovie(+id, updatedMovieDto);
   }
 
   // Delete a movie by ID
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.moviesService.remove(+id);
+  deleteMovie(@Param('id') id: string) {
+    return this.moviesService.deleteMovie(+id);
   }
 }
