@@ -16,7 +16,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n    \"title\":\"Johnny Bravo Wick\",\r\n    \"description\": \"When a man has nothing to lose except his bravo hair, there is only one thing left for him to do\",\r\n    \"releaseDate\":\"2024-10-10\",\r\n    \"genre\":[\"Action\", \"Romance\", \"Suspense\"]\r\n}",
+          "raw": "{\r\n    \"title\":\"johnny\",\r\n    \"description\": \"When a man has nothing to lose except his bravo hair, there is only one thing left for him to do\",\r\n    \"releaseDate\":\"2024-10-10\",\r\n    \"genre\":[\"Action\", \"Romance\", \"Suspense\"]\r\n}",
           "options": {
             "raw": {
               "language": "json"
